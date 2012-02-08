@@ -88,7 +88,7 @@ module ActiveMerchant
 
           def add_credit_card_info(xml)
             xml.tag! "CCAccountNum", credit_card.number
-            xml.tag! "CCExpireDate", "#{credit_card.month}#{credit_card.year}"
+            xml.tag! "CCExpireDate", "#{credit_card.month}#{credit_card.year[2..-1]}"
           end
 
           def add_managed_billing_info(xml)
