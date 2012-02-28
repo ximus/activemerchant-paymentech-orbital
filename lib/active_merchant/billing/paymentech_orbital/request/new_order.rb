@@ -15,7 +15,7 @@ module ActiveMerchant
           delegate :industry_type, :mb_type, :recurring_start_date,
             :recurring_end_date, :recurring_end_date_flag,
             :recurring_max_billings, :recurring_frequency,
-            :deferred_bill_date, :soft_descriptors, 
+            :deferred_bill_date, :soft_descriptors, :comments,
             :to => :options
 
           def request_type; "NewOrder"; end
@@ -66,7 +66,7 @@ module ActiveMerchant
               add_currency(xml)
             end
           end
-          
+
           def card_sec_val_ind
             return "" unless credit_card
             if credit_card.type == "amex"
@@ -108,6 +108,7 @@ module ActiveMerchant
           def add_order_information(xml)
             xml.tag! "OrderID", order_id
             xml.tag! "Amount", money
+            xml.tag! "Comments", comments
           end
 
           def add_soft_descriptor_info(xml)
